@@ -27,15 +27,15 @@ public class hitPoints : MonoBehaviour
 
         currentHealth -= damage;
 
-        
-            Debug.Log("Damage taken");
-            if (currentHealth <= 0)
-            {
-                currentHealth = 0;
-                OnDie();
-                Debug.Log("Death");
-            }
-        
+
+        Debug.Log("Damage taken");
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            OnDie();
+            Debug.Log("Death");
+        }
+
     }
 
 
@@ -49,17 +49,19 @@ public class hitPoints : MonoBehaviour
 
     private void OnDie()
     {
-        if (gameObject.CompareTag("player"))
-        SceneManager.LoadScene(1);
+        if (gameObject.CompareTag("Player"))
+            SceneManager.LoadScene("Death.Scene");
         Debug.Log("Change scene");
 
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+
+        }
 
 
     }
-
-
 }
-
 
 
 
