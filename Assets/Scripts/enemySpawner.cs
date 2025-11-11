@@ -72,4 +72,5 @@ public class enemySpawner : MonoBehaviour
 
         Instantiate(enemyPrefab, sp.position, sp.rotation);
     }
+    // Tack så mycket Copilot <3
 }
