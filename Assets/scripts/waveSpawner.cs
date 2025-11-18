@@ -1,5 +1,7 @@
 using System.Collections;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class waveSpawner : MonoBehaviour
 {
@@ -8,7 +10,7 @@ public class waveSpawner : MonoBehaviour
     public GameObject spawner3;
     public GameObject spawner4;
     public GameObject spawner5;
-    
+    public GameObject winScene;
 
     // Enemy prefab (must have tag "Enemy")
     public GameObject enemy;
@@ -26,6 +28,7 @@ public class waveSpawner : MonoBehaviour
         if (enemy == null) Debug.LogError("waveSpawner: enemy prefab not assigned!");
         if (spawner1 == null && spawner2 == null && spawner3 == null && spawner4 == null && spawner5 == null)
             Debug.LogError("waveSpawner: no spawners assigned!");
+        winScene.SetActive(false);
     }
 
     void Update()
@@ -34,6 +37,26 @@ public class waveSpawner : MonoBehaviour
         if (!isSpawning && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
            StartCoroutine(SpawnWave());
+        }
+        if (currentWave == 10)
+        {
+            Debug.Log("You Win!");
+            winScene.SetActive(true);
+        }
+        if (currentWave >= 3)
+        {
+            enemiesPerWave = 7;
+            timeBetweenWaves = 1.8f;
+        }
+        if (currentWave >= 5)
+        {
+            enemiesPerWave = 10;
+            timeBetweenWaves = 1.5f;
+        }
+        if (currentWave >= 8)
+        {
+            enemiesPerWave = 12;
+            timeBetweenWaves = 1.2f;
         }
     }
 
