@@ -1,10 +1,11 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class Hp  : MonoBehaviour
 {
+    [SerializeField] TMP_Text hpText;
     int maxHealth = 100;
     int currentHealth;
     public GameObject deathScene;
@@ -13,6 +14,8 @@ public class Hp  : MonoBehaviour
     {
         currentHealth = maxHealth;
         deathScene.SetActive(false);
+
+        hpText.text = currentHealth.ToString();
     }
 
     // Update is called once per frame
@@ -29,7 +32,7 @@ public class Hp  : MonoBehaviour
             {
                 
                 Destroy(gameObject);
-                
+                deathScene.SetActive(true);
             }
             if (gameObject.tag == "Enemy")
             {
