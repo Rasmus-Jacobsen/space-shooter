@@ -80,7 +80,7 @@ public class waveSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
 
-        // optional cooldown before allowing the next wave
+        // cooldown before allowing the next wave
         yield return new WaitForSeconds(timeBetweenWaves);
         isSpawning = false;
     }
