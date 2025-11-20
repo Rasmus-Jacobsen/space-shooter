@@ -7,7 +7,7 @@ public class enemyHp : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentHippoints = maxHippoints;
+        currentHippoints = maxHippoints;  // sätter fiendens hp till max hp när den spawnas
     }
 
     // Update is called once per frame
@@ -15,7 +15,7 @@ public class enemyHp : MonoBehaviour
     {
         
     }
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision) // om den träffs av ett skott så tar den skada
     {
         if (collision.gameObject.tag == "Bullet")
         {

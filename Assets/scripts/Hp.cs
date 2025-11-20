@@ -1,44 +1,49 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+
 using TMPro;
+
 
 public class Hp  : MonoBehaviour
 {
     [SerializeField] TMP_Text hpText;
     int maxHealth = 100;
-    int currentHealth;
-    public GameObject deathScene;
+    [SerializeField] int currentHealth;
+    int damage = 20;
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentHealth = maxHealth;
-        deathScene.SetActive(false);
+        currentHealth = maxHealth; // startar spelet med fullt Hp
+        
 
-        hpText.text = currentHealth.ToString();
+        
+    }
+
+    void Update()
+    {
+        hpText.text = "HP: " + currentHealth.ToString();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision) // om en enemy passerar backom dig så förlorar du hp
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            currentHealth -= 20;
+            currentHealth -= damage;
+           
+            Destroy(collision.gameObject);
             if (currentHealth <= 0)
             {
-                
-                Destroy(gameObject);
-                deathScene.SetActive(true);
-            }
-            if (gameObject.tag == "Enemy")
-            {
-                Destroy(collision.gameObject);
+                Debug.Log("Game Over");
+                SceneManager.LoadScene("deathScene");
             }
         }
     }
+   
 
 }
+    
+
+
+
